@@ -17,6 +17,11 @@ public enum OperatorType {
      * subtraction
      */
     Subtraction(0x9E5A823C),
+
+    /**
+     * greater than
+     */
+    GreaterThan(0x55D272AC),
     ;
 
     private final int value;

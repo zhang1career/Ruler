@@ -7,7 +7,7 @@ import lab.zhang.ruler.ao.Calculable;
 /**
  * @author zhangrj
  */
-abstract public class Operator<T> implements Calculable<T> {
+abstract public class Operator<R, V> implements Calculable<R, V> {
     protected String name;
     protected OperatorType operatorType;
     protected CardinalityType cardType;

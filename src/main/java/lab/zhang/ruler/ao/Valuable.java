@@ -5,10 +5,11 @@ import lab.zhang.ruler.pojo.IndexContext;
 /**
  * @author zhangrj
  */
-public interface Valuable<T> {
+public interface Valuable<V> {
     /**
      * Get the value
+     * @param indexContext The context that holds indices
      * @return value
      */
-    T getValue(IndexContext indexContext);
+    V getValue(IndexContext indexContext);
 }

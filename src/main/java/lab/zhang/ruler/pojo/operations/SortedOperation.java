@@ -19,27 +19,27 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class SortedOperation<T> extends Operation<T> {
+public class SortedOperation<R, V> extends Operation<R, V> {
     @NotNull
     @Contract("null, _ -> fail")
-    public static <T> SortedOperation<T> getInstance(Operator<T> operator, List<? extends Valuable<T>> operands) {
+    public static <R, V> SortedOperation<R, V> getInstance(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         if (!(operator instanceof SortableOperator)) {
             throw new IllegalArgumentException("The operator is not sortable");
         }
 
-        List<ComparableValuable<T>> comparableOperands = new ArrayList<>();
-        for (Valuable<T> operand : operands) {
+        List<ComparableValuable<V>> comparableOperands = new ArrayList<>();
+        for (Valuable<V> operand : operands) {
             if (!(operand instanceof ComparableValuable)) {
                 throw new IllegalArgumentException("An operand is not comparable");
             }
-            comparableOperands.add((ComparableValuable<T>) operand);
+            comparableOperands.add((ComparableValuable<V>) operand);
         }
 
         Collections.sort(comparableOperands);
-        return new SortedOperation<T>(operator, comparableOperands);
+        return new SortedOperation<>(operator, comparableOperands);
     }
 
-    private SortedOperation(Operator<T> operator, List<? extends Valuable<T>> operands) {
+    private SortedOperation(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         super(operator, operands);
     }
 }

@@ -5,13 +5,16 @@ import lab.zhang.ruler.pojo.IndexContext;
 import java.util.List;
 
 /**
+ * @param <R> The return type
+ * @param <V> The parameters type
  * @author zhangrj
  */
-public interface Calculable<T> {
+public interface Calculable<R, V> {
     /**
      * Calculate
+     *
      * @param operands values to be calculated
      * @return result
      */
-    Valuable<T> calc(List<? extends Valuable<T>> operands, IndexContext indexContext);
+    Valuable<R> calc(List<? extends Valuable<V>> operands, IndexContext indexContext);
 }

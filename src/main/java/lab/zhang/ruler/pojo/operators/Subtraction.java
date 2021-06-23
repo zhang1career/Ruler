@@ -1,7 +1,7 @@
 package lab.zhang.ruler.pojo.operators;
 
 import lab.zhang.ruler.pojo.IndexContext;
-import lab.zhang.ruler.pojo.operands.IntInstant;
+import lab.zhang.ruler.pojo.operands.comparables.instants.IntInstant;
 import lab.zhang.ruler.ao.Valuable;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author zhangrj
  */
-public class Subtraction extends UnsortableOperator<Integer> {
+public class Subtraction extends UnsortableOperator<Integer, Integer> {
     public Subtraction() {
         super(OperatorType.Subtraction, CardinalityType.Binary);
     }

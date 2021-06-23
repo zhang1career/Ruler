@@ -1,7 +1,7 @@
 package lab.zhang.ruler.pojo;
 
 import lab.zhang.ruler.ao.Valuable;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -10,30 +10,39 @@ import java.util.List;
 /**
  * @author zhangrj
  */
-@Data
-abstract public class Analyzer<T> {
-
-    public Analyzer(Operation<T> root) {
-        dfs(root);
+@NoArgsConstructor
+abstract public class Analyzer {
+    public AnalysisContext fire(Operation<?, ?> root) {
+        return dfs(root);
     }
 
+    private AnalysisContext dfs(@NotNull Operation<?, ?> root) {
+        AnalysisContext context = new AnalysisContext();
 
-    private AnalysisContext dfs(@NotNull Operation<T> root) {
         if (root.isLeaf()) {
-            return this.postTraversal(root, new AnalysisContext());
+            onTraversal(root, context);
+            return this.postTraversal(root, context);
         }
 
-        List<AnalysisContext> analysisContexts = new ArrayList<>();
-        for (Valuable<T> node : root.getOperands()) {
+        List<AnalysisContext> childrenContextList = new ArrayList<>();
+        for (Valuable<?> node : root.getOperands()) {
             if (!(node instanceof Operation)) {
                 continue;
             }
-            analysisContexts.add(dfs((Operation<T>) node));
+            childrenContextList.add(dfs((Operation<?, ?>) node));
         }
-
-        return postTraversal(root, mergeContext(analysisContexts).incrLevel());
+        context = mergeContext(childrenContextList);
+        return postTraversal(root, context.incrLevel());
     }
 
+
+    /**
+     * Do something on AST traversal
+     *
+     * @param node AST node
+     * @param analysisContext analysis context for now
+     */
+    protected abstract void onTraversal(Operation<?, ?> node, AnalysisContext analysisContext);
 
     /**
      * Do something after AST traversal
@@ -42,7 +51,7 @@ abstract public class Analyzer<T> {
      * @param analysisContext analysis context for now
      * @return analysis context for further
      */
-    protected abstract AnalysisContext postTraversal(Operation<T> node, AnalysisContext analysisContext);
+    protected abstract AnalysisContext postTraversal(Operation<?, ?> node, AnalysisContext analysisContext);
 
 
     /**
@@ -52,9 +61,4 @@ abstract public class Analyzer<T> {
      * @return analysis contexts after merged
      */
     protected abstract AnalysisContext mergeContext(List<AnalysisContext> contexts);
-
-
-    protected int hash(@NotNull Operation<T> operation, @NotNull IndexContext indexContext) {
-        return operation.getUuid() ^ indexContext.hashCode();
-    }
 }

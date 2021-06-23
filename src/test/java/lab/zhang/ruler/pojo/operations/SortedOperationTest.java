@@ -1,6 +1,6 @@
 package lab.zhang.ruler.pojo.operations;
 
-import lab.zhang.ruler.pojo.operands.IntInstant;
+import lab.zhang.ruler.pojo.operands.comparables.instants.IntInstant;
 import lab.zhang.ruler.pojo.operators.Addition;
 import lab.zhang.ruler.pojo.operators.SortableOperator;
 import org.assertj.core.util.Lists;
@@ -20,10 +20,10 @@ public class SortedOperationTest {
         IntInstant op1 = new IntInstant(1);
         IntInstant op2 = new IntInstant(2);
         IntInstant op3 = new IntInstant(2);
-        SortableOperator<Integer> tor = new Addition();
-        SortedOperation<Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
-        SortedOperation<Integer> tion2 = SortedOperation.getInstance(tor, Lists.list(op2, op1));
-        SortedOperation<Integer> tion3 = SortedOperation.getInstance(tor, Lists.list(op1, op3));
+        SortableOperator<Integer, Integer> tor = new Addition();
+        SortedOperation<Integer, Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
+        SortedOperation<Integer, Integer> tion2 = SortedOperation.getInstance(tor, Lists.list(op2, op1));
+        SortedOperation<Integer, Integer> tion3 = SortedOperation.getInstance(tor, Lists.list(op1, op3));
         assertEquals(tion1, tion2);
         assertEquals(tion1, tion3);
     }
@@ -32,9 +32,9 @@ public class SortedOperationTest {
     public void test_sortedOperationCompare_equal_maxInteger() {
         IntInstant op1 = new IntInstant(Integer.MIN_VALUE);
         IntInstant op2 = new IntInstant(Integer.MAX_VALUE);
-        SortableOperator<Integer> tor = new Addition();
-        SortedOperation<Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
-        SortedOperation<Integer> tion2 = SortedOperation.getInstance(tor, Lists.list(op2, op1));
+        SortableOperator<Integer, Integer> tor = new Addition();
+        SortedOperation<Integer, Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
+        SortedOperation<Integer, Integer> tion2 = SortedOperation.getInstance(tor, Lists.list(op2, op1));
         assertEquals(tion1, tion2);
     }
 
@@ -43,9 +43,9 @@ public class SortedOperationTest {
         IntInstant op1 = new IntInstant(1);
         IntInstant op2 = new IntInstant(2);
         IntInstant op3 = new IntInstant(3);
-        SortableOperator<Integer> tor = new Addition();
-        SortedOperation<Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
-        SortedOperation<Integer> tion3 = SortedOperation.getInstance(tor, Lists.list(op1, op3));
+        SortableOperator<Integer, Integer> tor = new Addition();
+        SortedOperation<Integer, Integer> tion1 = SortedOperation.getInstance(tor, Lists.list(op1, op2));
+        SortedOperation<Integer, Integer> tion3 = SortedOperation.getInstance(tor, Lists.list(op1, op3));
         assertNotEquals(tion1, tion3);
     }
 }

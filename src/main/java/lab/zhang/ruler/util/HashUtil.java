@@ -14,7 +14,7 @@ public class HashUtil {
     private static final int PRIME = 997;
     private static final int OFFSET = 7;
 
-    public static <T> int hash(@NotNull Operator<T> operator, List<? extends Valuable<T>> operands, int salt) {
+    public static <R, V> int hash(@NotNull Operator<R, V> operator, List<? extends Valuable<V>> operands, int salt) {
         int ret = salt ^ operator.hashCode();
         if (operands == null) {
             return ret;
@@ -29,5 +29,15 @@ public class HashUtil {
 
     public static <T> int hashWithContext(int hash, IndexContext indexContext) {
         return hash ^ indexContext.hashCode();
+    }
+
+    public static <T> Integer codeAsInt(T value) {
+        if (value instanceof Integer) {
+            return (Integer) value;
+        }
+        if (value instanceof String) {
+            return value.hashCode();
+        }
+        return null;
     }
 }

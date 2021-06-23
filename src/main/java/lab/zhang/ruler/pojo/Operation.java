@@ -16,13 +16,13 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class Operation<T> implements ComparableValuable<T>, Calculable<T> {
+public class Operation<R, V> implements ComparableValuable<R>, Calculable<R, V> {
     private static final int HASH_MASK = 0x96A55A69;
 
     @NotNull
-    public static <T> Operation<T> getInstance(Operator<T> operator, List<? extends Valuable<T>> operands) {
+    public static <R, T> Operation<R, T> getInstance(Operator<R, T> operator, List<? extends Valuable<T>> operands) {
         int uuid = hash(operator, operands);
-        Operation<T> operation = CacheUtil.getOperation(uuid);
+        Operation<R, T> operation = CacheUtil.getOperation(uuid);
         if (operation == null) {
             operation = new Operation<>(operator, operands);
             CacheUtil.setOperation(uuid, operation);
@@ -30,37 +30,34 @@ public class Operation<T> implements ComparableValuable<T>, Calculable<T> {
         return operation;
     }
 
-    public static <T> T getValueOf(Operation<T> operation, IndexContext indexContext) {
-        return operation.getValue(indexContext);
-    }
-
-    private static <T> int hash(Operator<T> operator, List<? extends Valuable<T>> operands) {
+    private static <R, V> int hash(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         return HashUtil.hash(operator, operands, HASH_MASK);
     }
 
 
-    protected Operator<T> operator;
+    protected Operator<R, V> operator;
 
-    protected List<? extends Valuable<T>> operands;
+    protected List<? extends Valuable<V>> operands;
 
     protected int uuid;
 
     boolean cacheOn = false;
 
 
-    public Operation(Operator<T> operator, List<? extends Valuable<T>> operands) {
+    public Operation(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         this.operator = operator;
         this.operands = operands;
         this.uuid = hash(operator, operands);
     }
 
     @Override
-    public T getValue(IndexContext indexContext) {
-        return calc(operands, indexContext).getValue(indexContext);
+    public R getValue(IndexContext indexContext) {
+        Valuable<R> result = calc(operands, indexContext);
+        return result.getValue(indexContext);
     }
 
     @Override
-    public Valuable<T> calc(List<? extends Valuable<T>> operands, IndexContext indexContext) {
+    public Valuable<R> calc(List<? extends Valuable<V>> operands, IndexContext indexContext) {
         if (operator == null || operands == null) {
             return null;
         }
@@ -68,7 +65,7 @@ public class Operation<T> implements ComparableValuable<T>, Calculable<T> {
     }
 
     @Override
-    public int compareTo(@NotNull Valuable<T> o) {
+    public int compareTo(@NotNull Valuable<R> o) {
         if (!(o instanceof Operation)) {
             return 1;
         }
@@ -86,7 +83,7 @@ public class Operation<T> implements ComparableValuable<T>, Calculable<T> {
             return false;
         }
 
-        Operation<?> op = (Operation<?>) obj;
+        Operation<?, ?> op = (Operation<?, ?>) obj;
         return uuid == op.uuid;
     }
 
@@ -99,7 +96,7 @@ public class Operation<T> implements ComparableValuable<T>, Calculable<T> {
         if (operands == null) {
             return true;
         }
-        for (Valuable<T> operand : operands) {
+        for (Valuable<V> operand : operands) {
             if (operand instanceof Operation) {
                 return false;
             }

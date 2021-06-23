@@ -6,7 +6,7 @@ import lab.zhang.ruler.ao.Calculable;
 /**
  * @author zhangrj
  */
-abstract public class SortableOperator<T> extends Operator<T> implements Calculable<T> {
+abstract public class SortableOperator<R, T> extends Operator<R, T> implements Calculable<R, T> {
     public SortableOperator(String name, OperatorType operatorType, CardinalityType cardType) {
         super(name, operatorType, cardType);
     }

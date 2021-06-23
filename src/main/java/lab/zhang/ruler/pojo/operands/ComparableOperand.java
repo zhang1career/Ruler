@@ -6,8 +6,8 @@ import lab.zhang.ruler.ao.ComparableValuable;
 /**
  * @author zhangrj
  */
-abstract public class ComparableOperand<V, T> extends Operand<V, T> implements ComparableValuable<T> {
-    public ComparableOperand(V value) {
+abstract public class ComparableOperand<V, N> extends Operand<V, N> implements ComparableValuable<V> {
+    public ComparableOperand(N value) {
         super(value);
     }
 }

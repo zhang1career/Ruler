@@ -1,6 +1,7 @@
 package lab.zhang.ruler.pojo.operands;
 
 import lab.zhang.ruler.pojo.IndexContext;
+import lab.zhang.ruler.pojo.operands.comparables.variables.IntVariable;
 import org.junit.Before;
 import org.junit.Test;
 

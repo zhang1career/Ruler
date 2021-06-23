@@ -1,13 +1,14 @@
-package lab.zhang.ruler.pojo.operands;
+package lab.zhang.ruler.pojo.operands.comparables.variables;
 
 import lab.zhang.ruler.ao.Valuable;
-import lab.zhang.ruler.pojo.IndexContext;
+import lab.zhang.ruler.pojo.operands.comparables.instants.StrInstant;
+import lab.zhang.ruler.pojo.operands.comparables.Variable;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author zhangrj
  */
-public class StrVariable extends ComparableOperand<String, String> {
+public class StrVariable extends Variable<String> {
     static final int TYPE = 0x3993CB02;
 
     public StrVariable(String value) {
@@ -17,15 +18,6 @@ public class StrVariable extends ComparableOperand<String, String> {
     @Override
     protected int getType() {
         return TYPE;
-    }
-
-    @Override
-    public String getValue(@NotNull IndexContext indexContext) {
-        String ret = indexContext.getIndex(value);
-        if (ret == null) {
-            throw new RuntimeException("An index cannot get value");
-        }
-        return ret;
     }
 
     @Override

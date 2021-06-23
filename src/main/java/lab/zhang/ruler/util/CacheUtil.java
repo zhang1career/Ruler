@@ -15,8 +15,6 @@ public class CacheUtil {
 
     protected static Cache<Integer, Operation> operationCache;
 
-    protected static Cache<Integer, Object> resultCache;
-
     static {
         cacheManager = CacheManagerBuilder.newCacheManagerBuilder().build();
         cacheManager.init();
@@ -29,30 +27,13 @@ public class CacheUtil {
                         ResourcePoolsBuilder.heap(100)
                 ).build()
         );
-
-        resultCache = cacheManager.createCache(
-                "RESULT",
-                CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                        Integer.class,
-                        Object.class,
-                        ResourcePoolsBuilder.heap(100)
-                ).build()
-        );
     }
 
-    public static <T> Operation<T> getOperation(int uuid) {
-        return (Operation<T>) operationCache.get(uuid);
+    public static <R, V> Operation<R, V> getOperation(int uuid) {
+        return (Operation<R, V>) operationCache.get(uuid);
     }
 
-    public static <T> void setOperation(int uuid, Operation<T> operation) {
+    public static <R, V> void setOperation(int uuid, Operation<R, V> operation) {
         operationCache.put(uuid, operation);
-    }
-
-    public static <T> T getResult(int uuid) {
-        return (T) resultCache.get(uuid);
-    }
-
-    public static <T> void setResult(int uuid, T result) {
-        resultCache.put(uuid, result);
     }
 }

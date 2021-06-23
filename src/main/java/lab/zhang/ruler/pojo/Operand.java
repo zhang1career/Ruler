@@ -1,25 +1,26 @@
 package lab.zhang.ruler.pojo;
 
 import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.util.HashUtil;
 import lombok.Data;
 
 /**
  * @author zhangrj
  */
 @Data
-abstract public class Operand<V, T> implements Valuable<T> {
+abstract public class Operand<V, N> implements Valuable<V> {
 
     protected long id;
     protected String name;
-    protected V value;
+    protected N value;
 
 
-    public Operand(String name, V value) {
+    public Operand(String name, N value) {
         this.name = name;
         this.value = value;
     }
 
-    public Operand(V value) {
+    public Operand(N value) {
         this("", value);
     }
 
@@ -27,6 +28,6 @@ abstract public class Operand<V, T> implements Valuable<T> {
 
     @Override
     public int hashCode() {
-        return getType() ^ (Integer) value;
+        return getType() ^ HashUtil.codeAsInt(value);
     }
 }
