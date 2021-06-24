@@ -5,7 +5,7 @@ import lab.zhang.ruler.pojo.AnalysisContext;
 import lab.zhang.ruler.pojo.Analyzer;
 import lab.zhang.ruler.pojo.Operand;
 import lab.zhang.ruler.pojo.Operation;
-import lab.zhang.ruler.pojo.operands.comparables.Variable;
+import lab.zhang.ruler.pojo.operands.Variable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

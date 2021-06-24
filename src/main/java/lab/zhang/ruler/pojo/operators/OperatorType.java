@@ -22,6 +22,11 @@ public enum OperatorType {
      * greater than
      */
     GreaterThan(0x55D272AC),
+
+    /**
+     * logical or
+     */
+    LogicalOr(0x6D8B9541),
     ;
 
     private final int value;

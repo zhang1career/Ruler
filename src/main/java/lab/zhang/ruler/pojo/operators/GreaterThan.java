@@ -2,7 +2,7 @@ package lab.zhang.ruler.pojo.operators;
 
 import lab.zhang.ruler.ao.Valuable;
 import lab.zhang.ruler.pojo.IndexContext;
-import lab.zhang.ruler.pojo.operands.comparables.instants.BoolInstant;
+import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

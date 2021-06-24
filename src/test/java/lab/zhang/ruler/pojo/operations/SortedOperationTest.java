@@ -1,7 +1,7 @@
 package lab.zhang.ruler.pojo.operations;
 
-import lab.zhang.ruler.pojo.operands.comparables.instants.IntInstant;
-import lab.zhang.ruler.pojo.operators.Addition;
+import lab.zhang.ruler.pojo.operands.instants.IntInstant;
+import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
 import lab.zhang.ruler.pojo.operators.SortableOperator;
 import org.assertj.core.util.Lists;
 import org.junit.Before;

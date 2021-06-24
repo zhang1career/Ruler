@@ -8,7 +8,8 @@ import java.util.Map;
  */
 public class IndexContext {
     private long reqid;
-    private Map<String, Object> indices = new HashMap<>();
+
+    private final Map<String, Object> indices = new HashMap<>();
 
 
     public <T> T getIndex(String key) {

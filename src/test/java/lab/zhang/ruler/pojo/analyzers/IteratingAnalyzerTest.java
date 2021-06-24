@@ -3,11 +3,13 @@ package lab.zhang.ruler.pojo.analyzers;
 import lab.zhang.ruler.pojo.AnalysisContext;
 import lab.zhang.ruler.pojo.IndexContext;
 import lab.zhang.ruler.pojo.executors.SingleExecutor;
-import lab.zhang.ruler.pojo.operands.comparables.instants.IntInstant;
-import lab.zhang.ruler.pojo.operands.comparables.variables.IntVariable;
+import lab.zhang.ruler.pojo.operands.instants.IntInstant;
+import lab.zhang.ruler.pojo.operands.variables.IntVariable;
 import lab.zhang.ruler.pojo.operations.SortedOperation;
 import lab.zhang.ruler.pojo.operations.UnsortedOperation;
 import lab.zhang.ruler.pojo.operators.*;
+import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
+import lab.zhang.ruler.pojo.operators.arithmetics.Subtraction;
 import org.assertj.core.util.Lists;
 import org.junit.*;
 
@@ -21,6 +23,7 @@ public class IteratingAnalyzerTest {
     private final Addition add = new Addition();
     private final Subtraction sub = new Subtraction();
     private final GreaterThan gt = new GreaterThan();
+    private final LogicalOr or = new LogicalOr();
 
     private IntVariable amount;
     private IntVariable age;
@@ -44,8 +47,12 @@ public class IteratingAnalyzerTest {
     @Test
     public void test_analyzer_fire() {
         SortedOperation<Integer, Integer> addOperation = SortedOperation.getInstance(add, Lists.list(op1, age));
-        UnsortedOperation<Boolean, Integer> gtOperation = UnsortedOperation.getInstance(gt, Lists.list(addOperation, op18));
-        AnalysisContext context = analyzer.fire(gtOperation);
+        UnsortedOperation<Boolean, Integer> gtOperation1 = UnsortedOperation.getInstance(gt, Lists.list(addOperation, op18));
+        UnsortedOperation<Integer, Integer> subOperation = UnsortedOperation.getInstance(sub, Lists.list(amount, op100));
+        UnsortedOperation<Boolean, Integer> gtOperation2 = UnsortedOperation.getInstance(gt, Lists.list(subOperation, op0));
+        SortedOperation<Boolean, Boolean> orOperation = SortedOperation.getInstance(or, Lists.list(gtOperation1, gtOperation2));
+
+        AnalysisContext context = analyzer.fire(orOperation);
 
         System.out.println(context.getIndexMap());
         System.out.println(context.getOperationList());

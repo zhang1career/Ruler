@@ -13,17 +13,19 @@ public enum CardinalityType {
      * one
      */
     Unary(1),
+
     /**
      * two
      */
     Binary(2),
+
     /**
      * more
      */
     Multinary(Integer.MAX_VALUE) {
         @Override
         public boolean checkCard(int num) {
-            return num >= 0;
+            return num > 0;
         }
     },
     ;

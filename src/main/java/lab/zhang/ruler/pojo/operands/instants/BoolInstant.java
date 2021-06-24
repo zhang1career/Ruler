@@ -1,8 +1,8 @@
-package lab.zhang.ruler.pojo.operands.comparables.instants;
+package lab.zhang.ruler.pojo.operands.instants;
 
 import lab.zhang.ruler.ao.Valuable;
-import lab.zhang.ruler.pojo.operands.comparables.Instant;
-import lab.zhang.ruler.pojo.operands.comparables.variables.BoolVariable;
+import lab.zhang.ruler.pojo.operands.Instant;
+import lab.zhang.ruler.pojo.operands.variables.BoolVariable;
 import org.jetbrains.annotations.NotNull;
 
 /**
