@@ -1,6 +1,6 @@
 package lab.zhang.ruler.pojo;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,17 +37,17 @@ abstract public class Analyzer {
 
 
     /**
-     * Do something on AST traversal
+     * Do something on Ast traversal
      *
-     * @param node AST node
+     * @param node Ast node
      * @param analysisContext analysis context for now
      */
     protected abstract void onTraversal(Operation<?, ?> node, AnalysisContext analysisContext);
 
     /**
-     * Do something after AST traversal
+     * Do something after Ast traversal
      *
-     * @param node AST node
+     * @param node Ast node
      * @param analysisContext analysis context for now
      * @return analysis context for further
      */

@@ -7,9 +7,10 @@ import lab.zhang.ruler.pojo.operands.instants.IntInstant;
 import lab.zhang.ruler.pojo.operands.variables.IntVariable;
 import lab.zhang.ruler.pojo.operations.SortedOperation;
 import lab.zhang.ruler.pojo.operations.UnsortedOperation;
-import lab.zhang.ruler.pojo.operators.*;
 import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
 import lab.zhang.ruler.pojo.operators.arithmetics.Subtraction;
+import lab.zhang.ruler.pojo.operators.comparators.GreaterThan;
+import lab.zhang.ruler.pojo.operators.logics.LogicalOr;
 import org.assertj.core.util.Lists;
 import org.junit.*;
 

@@ -1,6 +1,7 @@
 package lab.zhang.ruler.pojo.operands.instants;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
+import lab.zhang.ruler.pojo.RulerType;
 import lab.zhang.ruler.pojo.operands.Instant;
 import lab.zhang.ruler.pojo.operands.variables.StrVariable;
 import org.jetbrains.annotations.NotNull;
@@ -9,15 +10,9 @@ import org.jetbrains.annotations.NotNull;
  * @author zhangrj
  */
 public class StrInstant extends Instant<String> {
-    static final int TYPE = 0x5FD3EFD6;
 
     public StrInstant(String value) {
-        super(value);
-    }
-
-    @Override
-    protected int getType() {
-        return TYPE;
+        super(RulerType.StrInstant, value);
     }
 
     @Override

@@ -1,8 +1,11 @@
-package lab.zhang.ruler.pojo.operators;
+package lab.zhang.ruler.pojo.operators.comparators;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.pojo.IndexContext;
 import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
+import lab.zhang.ruler.pojo.operators.CardinalityType;
+import lab.zhang.ruler.pojo.RulerType;
+import lab.zhang.ruler.pojo.operators.UnsortableOperator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  */
 public class GreaterThan extends UnsortableOperator<Boolean, Integer> {
     public GreaterThan() {
-        super(OperatorType.GreaterThan, CardinalityType.Binary);
+        super(RulerType.GreaterThan, CardinalityType.Binary);
     }
 
     @Override

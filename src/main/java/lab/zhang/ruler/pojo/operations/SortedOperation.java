@@ -1,7 +1,7 @@
 package lab.zhang.ruler.pojo.operations;
 
-import lab.zhang.ruler.ao.ComparableValuable;
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.ComparableValuable;
+import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.pojo.Operation;
 import lab.zhang.ruler.pojo.Operator;
 import lab.zhang.ruler.pojo.operators.SortableOperator;

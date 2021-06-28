@@ -1,6 +1,6 @@
 package lab.zhang.ruler.pojo.analyzers;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.pojo.AnalysisContext;
 import lab.zhang.ruler.pojo.Analyzer;
 import lab.zhang.ruler.pojo.Operand;

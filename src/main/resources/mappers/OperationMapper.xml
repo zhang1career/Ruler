@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lab.zhang.ruler.dao.OperationDao">
+    <resultMap id="BaseResultMap" type="lab.zhang.ruler.pojo.Operation">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="operator_id" jdbcType="INTEGER" property="operatorId"/>
+        <result column="operand_ids" jdbcType="VARCHAR" property="operandIds"/>
+        <result column="create_time" jdbcType="INTEGER" property="createTime"/>
+        <result column="update_time" jdbcType="INTEGER" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, operator_id, operand_ids, create_time, update_time
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from operation
+        where id = #{id}
+    </select>
+
+</mapper>

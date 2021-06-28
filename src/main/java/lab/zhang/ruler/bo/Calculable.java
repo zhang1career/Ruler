@@ -1,4 +1,4 @@
-package lab.zhang.ruler.ao;
+package lab.zhang.ruler.bo;
 
 import lab.zhang.ruler.pojo.IndexContext;
 

@@ -1,6 +1,7 @@
 package lab.zhang.ruler.pojo.operands.instants;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
+import lab.zhang.ruler.pojo.RulerType;
 import lab.zhang.ruler.pojo.operands.Instant;
 import lab.zhang.ruler.pojo.operands.variables.IntVariable;
 import org.jetbrains.annotations.NotNull;
@@ -9,15 +10,9 @@ import org.jetbrains.annotations.NotNull;
  * @author zhangrj
  */
 public class IntInstant extends Instant<Integer> {
-    static final int TYPE = 0x35AA1F69;
 
     public IntInstant(Integer value) {
-        super(value);
-    }
-
-    @Override
-    protected int getType() {
-        return TYPE;
+        super(RulerType.IntInstant, value);
     }
 
     @Override

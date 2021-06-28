@@ -1,6 +1,6 @@
 package lab.zhang.ruler.pojo.readers;
 
-import lab.zhang.ruler.ao.Readable;
+import lab.zhang.ruler.bo.Readable;
 import lab.zhang.ruler.pojo.IndexContext;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;

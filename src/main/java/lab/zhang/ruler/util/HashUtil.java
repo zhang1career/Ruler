@@ -1,6 +1,6 @@
 package lab.zhang.ruler.util;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.pojo.IndexContext;
 import lab.zhang.ruler.pojo.Operator;
 import org.jetbrains.annotations.NotNull;

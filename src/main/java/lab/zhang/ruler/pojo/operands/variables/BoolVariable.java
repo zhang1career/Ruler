@@ -1,6 +1,7 @@
 package lab.zhang.ruler.pojo.operands.variables;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
+import lab.zhang.ruler.pojo.RulerType;
 import lab.zhang.ruler.pojo.operands.Variable;
 import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
 import org.jetbrains.annotations.NotNull;
@@ -9,15 +10,10 @@ import org.jetbrains.annotations.NotNull;
  * @author zhangrj
  */
 public class BoolVariable extends Variable<Boolean> {
-    static final int TYPE = 0x245D1431;
 
     public BoolVariable(String value) {
-        super(value);
-    }
+        super(RulerType.BoolVariable, value);
 
-    @Override
-    protected int getType() {
-        return TYPE;
     }
 
     @Override

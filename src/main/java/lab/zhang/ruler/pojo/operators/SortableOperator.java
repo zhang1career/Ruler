@@ -1,17 +1,14 @@
 package lab.zhang.ruler.pojo.operators;
 
 import lab.zhang.ruler.pojo.Operator;
-import lab.zhang.ruler.ao.Calculable;
+import lab.zhang.ruler.bo.Calculable;
+import lab.zhang.ruler.pojo.RulerType;
 
 /**
  * @author zhangrj
  */
 abstract public class SortableOperator<R, T> extends Operator<R, T> implements Calculable<R, T> {
-    public SortableOperator(String name, OperatorType operatorType, CardinalityType cardType) {
-        super(name, operatorType, cardType);
-    }
-
-    public SortableOperator(OperatorType operatorType, CardinalityType cardType) {
-        this("", operatorType, cardType);
+    public SortableOperator(RulerType rulerType, CardinalityType cardType) {
+        super(rulerType, cardType);
     }
 }

@@ -1,8 +1,8 @@
 package lab.zhang.ruler.pojo;
 
-import lab.zhang.ruler.ao.Calculable;
-import lab.zhang.ruler.ao.ComparableValuable;
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Calculable;
+import lab.zhang.ruler.bo.ComparableValuable;
+import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.util.CacheUtil;
 import lab.zhang.ruler.util.HashUtil;
 import lombok.Getter;

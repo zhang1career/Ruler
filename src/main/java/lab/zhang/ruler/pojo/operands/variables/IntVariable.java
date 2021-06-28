@@ -1,6 +1,7 @@
 package lab.zhang.ruler.pojo.operands.variables;
 
-import lab.zhang.ruler.ao.Valuable;
+import lab.zhang.ruler.bo.Valuable;
+import lab.zhang.ruler.pojo.RulerType;
 import lab.zhang.ruler.pojo.operands.Variable;
 import lab.zhang.ruler.pojo.operands.instants.IntInstant;
 import org.jetbrains.annotations.NotNull;
@@ -9,15 +10,9 @@ import org.jetbrains.annotations.NotNull;
  * @author zhangrj
  */
 public class IntVariable extends Variable<Integer> {
-    static final int TYPE = 0xD0E40A0;
 
     public IntVariable(String value) {
-        super(value);
-    }
-
-    @Override
-    protected int getType() {
-        return TYPE;
+        super(RulerType.IntVariable, value);
     }
 
     @Override
