@@ -9,6 +9,6 @@ import lab.zhang.ruler.pojo.readers.InstantReader;
  */
 abstract public class Instant<V> extends Operand<V, V> {
     public Instant(RulerType rulerType, V value) {
-        super(rulerType, value, new InstantReader<V>());
+        super(rulerType, value, new InstantReader<>());
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GreaterThan extends UnsortableOperator<Boolean, Integer> {
     public GreaterThan() {
-        super(RulerType.GreaterThan, CardinalityType.Binary);
+        super(RulerType.GREATER_THAN, CardinalityType.Binary);
     }
 
     @Override

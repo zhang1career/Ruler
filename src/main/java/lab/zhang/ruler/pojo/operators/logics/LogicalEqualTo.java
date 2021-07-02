@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LogicalEqualTo extends SortableOperator<Boolean, Boolean> {
     public LogicalEqualTo() {
-        super(RulerType.LogicalEqualTo, CardinalityType.Binary);
+        super(RulerType.LOGICAL_EQUAL_TO, CardinalityType.Binary);
     }
 
     @Override

@@ -7,16 +7,18 @@ import lab.zhang.ruler.bo.Calculable;
  * @author zhangrj
  */
 abstract public class Operator<R, V> implements Calculable<R, V> {
-    protected RulerType rulerType;
+
+    protected RulerType type;
+
     protected CardinalityType cardType;
 
-    public Operator(RulerType rulerType, CardinalityType cardType) {
-        this.rulerType = rulerType;
+    public Operator(RulerType type, CardinalityType cardType) {
+        this.type = type;
         this.cardType = cardType;
     }
 
     @Override
     public int hashCode() {
-        return rulerType.getUuid();
+        return type.getUuid();
     }
 }

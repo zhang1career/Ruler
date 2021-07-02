@@ -12,7 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class StrInstant extends Instant<String> {
 
     public StrInstant(String value) {
-        super(RulerType.StrInstant, value);
+        super(RulerType.STR_INSTANT, value);
+    }
+
+    public StrInstant() {
+        this(null);
     }
 
     @Override

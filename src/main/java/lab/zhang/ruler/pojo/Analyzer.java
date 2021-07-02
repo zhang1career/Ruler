@@ -37,17 +37,17 @@ abstract public class Analyzer {
 
 
     /**
-     * Do something on Ast traversal
+     * Do something on Token traversal
      *
-     * @param node Ast node
+     * @param node Token node
      * @param analysisContext analysis context for now
      */
     protected abstract void onTraversal(Operation<?, ?> node, AnalysisContext analysisContext);
 
     /**
-     * Do something after Ast traversal
+     * Do something after Token traversal
      *
-     * @param node Ast node
+     * @param node Token node
      * @param analysisContext analysis context for now
      * @return analysis context for further
      */

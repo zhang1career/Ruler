@@ -2,8 +2,8 @@ package lab.zhang.ruler.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import lab.zhang.ruler.exception.AstTypeException;
-import lab.zhang.ruler.pojo.Ast;
+import lab.zhang.ruler.exception.TokenizationException;
+import lab.zhang.ruler.pojo.Token;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,37 +15,40 @@ import static com.alibaba.fastjson.JSON.toJSONString;
  */
 public class Lexer {
 
-    public Ast fromJson(String cond) {
+    public Token fromJson(String cond) {
         if (cond == null || cond.length() <= 0) {
             return null;
         }
 
-        Ast ast = JSON.parseObject(cond, Ast.class);
-        // checkage
-        if (ast.getType() == null) {
-            throw new AstTypeException("The type is missing");
+        Token token = JSON.parseObject(cond, Token.class);
+        // check
+        if (token.getName() == null || "".equals(token.getName())) {
+            throw new TokenizationException("The name is missing or empty");
+        }
+        if (token.getType() == null) {
+            throw new TokenizationException("The type is missing");
         }
 
-        if (ast.getValue() == null) {
-            return ast;
+        if (token.getValue() == null) {
+            return token;
         }
-        if (!(ast.getValue() instanceof JSONArray)) {
-            return ast;
+        if (!(token.getValue() instanceof JSONArray)) {
+            return token;
         }
 
-        List<Ast> childrenAst = new ArrayList<>();
-        for (Object childCond : (JSONArray) ast.getValue()) {
-            childrenAst.add(fromJson(childCond.toString()));
+        List<Token> childrenToken = new ArrayList<>();
+        for (Object childCond : (JSONArray) token.getValue()) {
+            childrenToken.add(fromJson(childCond.toString()));
         }
-        ast.setValue(childrenAst);
+        token.setValue(childrenToken);
 
-        return ast;
+        return token;
     }
 
-    public String toJson(Ast ast) {
-        if (ast == null) {
+    public String toJson(Token token) {
+        if (token == null) {
             return null;
         }
-        return toJSONString(ast, Ast.getFilter());
+        return toJSONString(token, lab.zhang.ruler.pojo.Token.getFilter());
     }
 }

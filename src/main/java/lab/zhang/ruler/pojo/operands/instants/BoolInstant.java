@@ -12,7 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class BoolInstant extends Instant<Boolean> {
 
     public BoolInstant(Boolean value) {
-        super(RulerType.BoolInstant, value);
+        super(RulerType.BOOL_INSTANT, value);
+    }
+
+    public BoolInstant() {
+        this(null);
     }
 
     @Override

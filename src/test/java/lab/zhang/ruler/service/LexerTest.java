@@ -1,7 +1,24 @@
 package lab.zhang.ruler.service;
 
-import lab.zhang.ruler.pojo.Ast;
-import org.junit.*;
+import lab.zhang.ruler.pojo.IndexContext;
+import lab.zhang.ruler.pojo.Operation;
+import lab.zhang.ruler.pojo.Token;
+import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
+import lab.zhang.ruler.pojo.operands.instants.IntInstant;
+import lab.zhang.ruler.pojo.operands.variables.BoolVariable;
+import lab.zhang.ruler.pojo.operands.variables.IntVariable;
+import lab.zhang.ruler.pojo.operations.SortedOperation;
+import lab.zhang.ruler.pojo.operations.UnsortedOperation;
+import lab.zhang.ruler.pojo.operators.SortableOperator;
+import lab.zhang.ruler.pojo.operators.UnsortableOperator;
+import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
+import lab.zhang.ruler.pojo.operators.comparators.GreaterThan;
+import lab.zhang.ruler.pojo.operators.logics.LogicalEqualTo;
+import lab.zhang.ruler.pojo.operators.logics.LogicalOr;
+import org.assertj.core.util.Lists;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
@@ -19,56 +36,77 @@ public class LexerTest {
     }
 
     @Test
-    public void test_fromJson_and_toJson_with_nullCond() {
-        Ast ast = target.fromJson(null);
-        assertNull(ast);
+    public void test_fromJson_with_nullCond() {
+        Token token = target.fromJson(null);
+        assertNull(token);
     }
 
     @Test
-    public void test_fromJson_and_toJson_with_emptyCond() {
+    public void test_fromJson_with_emptyCond() {
         String inputCond = "";
-        Ast ast = target.fromJson(inputCond);
-        assertNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNull(token);
+    }
 
-        String outputCond = target.toJson(ast);
+    @Test
+    public void test_toJson_with_emptyCond() {
+        String outputCond = target.toJson(null);
         assertNull(outputCond);
     }
 
     @Test
     public void test_fromJson_and_toJson_with_simpleAstCond() {
         String inputCond = "{\"name\":\"在【赠礼】名单中\",\"type\":10,\"value\":\"isInGiftNamelist\"}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
 
-        assertEquals("在【赠礼】名单中", ast.getName());
-        assertEquals(10, ast.getType().getId());
-        assertEquals("isInGiftNamelist", ast.getValue());
+        assertEquals("在【赠礼】名单中", token.getName());
+        assertEquals(10, token.getType().getId());
+        assertEquals("isInGiftNamelist", token.getValue());
 
-        String outputCond = target.toJson(ast);
+        String outputCond = target.toJson(token);
         assertEquals(inputCond, outputCond);
     }
 
     @Test
     public void test_fromJson_and_toJson_with_combinationAstCond() {
         String inputCond = "{\"name\":\">\",\"type\":28,\"value\":[{\"name\":\"年龄\",\"type\":11,\"value\":\"age\"},{\"name\":\"18\",\"type\":1,\"value\":18}]}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
 
-        assertEquals(">", ast.getName());
-        assertEquals(28, ast.getType().getId());
+        assertEquals(">", token.getName());
+        assertEquals(28, token.getType().getId());
 
-        String outputCond = target.toJson(ast);
+        String outputCond = target.toJson(token);
         assertEquals(inputCond, outputCond);
     }
 
     @Test
     public void test_fromJson_and_toJson_with_complexAstCond() {
-        String inputCond = "{\"name\":\"or\",\"type\":33,\"value\":[{\"name\":\"=\",\"type\":24,\"value\":[{\"name\":\"在【赠礼】名单中\",\"type\":10,\"value\":\"isInGiftNamelist\"},{\"name\":\"真\",\"type\":0,\"value\":true}]},{\"name\":\">\",\"type\":28,\"value\":[{\"name\":\"年龄\",\"type\":11,\"value\":\"age\"},{\"name\":\"18\",\"type\":1,\"value\":18}]}]}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        String inputCond = "{\"name\":\"or\",\"type\":33,\"value\":[{\"name\":\"=\",\"type\":30,\"value\":[{\"name\":\"在【赠礼】名单中\",\"type\":10,\"value\":\"isInGiftNamelist\"},{\"name\":\"真\",\"type\":0,\"value\":true}]},{\"name\":\">\",\"type\":28,\"value\":[{\"name\":\"年龄\",\"type\":11,\"value\":\"age\"},{\"name\":\"18\",\"type\":1,\"value\":18}]}]}";
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
 
-        String outputCond = target.toJson(ast);
+        String outputCond = target.toJson(token);
         assertEquals(inputCond, outputCond);
+    }
+
+    @Test
+    public void test_fromJson_and_toJson_with_emptyNameCond() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("name is missing or empty");
+
+        String inputCond = "{\"name\":\"\",\"type\":1,\"value\":\"isInGiftNamelist\"}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_and_toJson_with_nullNameCond() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("name is missing or empty");
+
+        String inputCond = "{\"name\":null,\"type\":1,\"value\":\"isInGiftNamelist\"}";
+        target.fromJson(inputCond);
     }
 
     @Test
@@ -113,8 +151,8 @@ public class LexerTest {
         expectedEx.expectMessage("value : 3.14");
 
         String inputCond = "{\"name\":\"在【赠礼】名单中\",\"type\":3.14,\"value\":\"isInGiftNamelist\"}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
     }
 
     @Test
@@ -123,21 +161,21 @@ public class LexerTest {
         expectedEx.expectMessage("type does not exist");
 
         String inputCond = "{\"name\":\"在【赠礼】名单中\",\"type\":\"Integer.class\",\"value\":\"isInGiftNamelist\"}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
     }
 
     @Test
     public void test_fromJson_and_toJson_with_duplicateTypeCond() {
         String inputCond = "{\"name\":\"在【赠礼】名单中\",\"type\":1,\"type\":2,\"value\":\"isInGiftNamelist\"}";
-        Ast ast = target.fromJson(inputCond);
-        assertNotNull(ast);
+        Token token = target.fromJson(inputCond);
+        assertNotNull(token);
 
-        assertEquals("在【赠礼】名单中", ast.getName());
-        assertEquals(2, ast.getType().getId());
-        assertEquals("isInGiftNamelist", ast.getValue());
+        assertEquals("在【赠礼】名单中", token.getName());
+        assertEquals(2, token.getType().getId());
+        assertEquals("isInGiftNamelist", token.getValue());
 
-        String outputCond = target.toJson(ast);
+        String outputCond = target.toJson(token);
         assertEquals("{\"name\":\"在【赠礼】名单中\",\"type\":2,\"value\":\"isInGiftNamelist\"}", outputCond);
     }
 

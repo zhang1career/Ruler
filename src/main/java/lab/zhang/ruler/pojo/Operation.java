@@ -30,7 +30,7 @@ public class Operation<R, V> implements ComparableValuable<R>, Calculable<R, V> 
         return operation;
     }
 
-    private static <R, V> int hash(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
+    public static <R, V> int hash(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         return HashUtil.hash(operator, operands, HASH_MASK);
     }
 
@@ -47,7 +47,16 @@ public class Operation<R, V> implements ComparableValuable<R>, Calculable<R, V> 
     public Operation(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         this.operator = operator;
         this.operands = operands;
-        this.uuid = hash(operator, operands);
+        this.uuid = hash(this.operator, this.operands);
+    }
+
+    public Operation(Operator<R, V> operator) {
+        this.operator = operator;
+    }
+
+    public void setOperands(List<? extends Valuable<V>> operands) {
+        this.operands = operands;
+        this.uuid = hash(this.operator, this.operands);
     }
 
     @Override

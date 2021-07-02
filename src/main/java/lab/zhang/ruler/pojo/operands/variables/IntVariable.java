@@ -12,7 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class IntVariable extends Variable<Integer> {
 
     public IntVariable(String value) {
-        super(RulerType.IntVariable, value);
+        super(RulerType.INT_VARIABLE, value);
+    }
+
+    public IntVariable() {
+        this(null);
     }
 
     @Override

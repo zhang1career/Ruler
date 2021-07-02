@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ruler-unit" type="JUnit" factoryName="JUnit">
+    <module name="ruler" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="pattern" />
+    <patterns>
+      <pattern testClass="lab.zhang.ruler.pojo.operands.instants.BoolInstantTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operands.instants.IntInstantTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operands.instants.StrInstantTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operands.variables.BoolVariableTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operands.variables.IntVariableTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operands.variables.StrVariableTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operations.SortedOperationTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.operations.UnsortedOperationTest" />
+      <pattern testClass="lab.zhang.ruler.pojo.readers.IndexReaderTest" />
+      <pattern testClass="lab.zhang.ruler.service.LexerTest" />
+      <pattern testClass="lab.zhang.ruler.service.ParserTest" />
+    </patterns>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

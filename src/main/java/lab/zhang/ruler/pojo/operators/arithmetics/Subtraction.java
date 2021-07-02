@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Subtraction extends UnsortableOperator<Integer, Integer> {
     public Subtraction() {
-        super(RulerType.Subtraction, CardinalityType.Binary);
+        super(RulerType.SUBTRACTION, CardinalityType.Binary);
     }
 
     @Override

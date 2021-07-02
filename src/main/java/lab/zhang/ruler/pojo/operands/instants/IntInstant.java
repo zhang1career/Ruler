@@ -12,7 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class IntInstant extends Instant<Integer> {
 
     public IntInstant(Integer value) {
-        super(RulerType.IntInstant, value);
+        super(RulerType.INT_INSTANT, value);
+    }
+
+    public IntInstant() {
+        this(null);
     }
 
     @Override

@@ -12,8 +12,11 @@ import org.jetbrains.annotations.NotNull;
 public class BoolVariable extends Variable<Boolean> {
 
     public BoolVariable(String value) {
-        super(RulerType.BoolVariable, value);
+        super(RulerType.BOOL_VARIABLE, value);
+    }
 
+    public BoolVariable() {
+        this(null);
     }
 
     @Override

@@ -1,14 +1,18 @@
 package lab.zhang.ruler.pojo;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
-import lab.zhang.ruler.exception.AstTypeException;
+import lab.zhang.ruler.exception.TokenizationException;
 import lombok.Data;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author zhangrj
  */
 @Data
-public class Ast {
+public class Token {
+    @NotNull
+    @Contract(pure = true)
     public static ValueFilter getFilter() {
         return (object, name, value) -> {
             try {
@@ -24,11 +28,16 @@ public class Ast {
 
 
     private String name;
+
     private RulerType type;
+
     private Object value;
 
 
-    public Ast(String name, RulerType type, Object value)  {
+    public Token(String name, RulerType type, Object value) {
+        if (type == null) {
+            throw new TokenizationException("The type does not exist");
+        }
         this.name = name;
         this.type = type;
         this.value = value;
@@ -36,7 +45,7 @@ public class Ast {
 
     public void setType(RulerType type) {
         if (type == null) {
-            throw new AstTypeException("The type does not exist");
+            throw new TokenizationException("The type does not exist");
         }
         this.type = type;
     }

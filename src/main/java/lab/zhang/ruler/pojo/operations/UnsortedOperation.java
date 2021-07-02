@@ -27,7 +27,11 @@ public class UnsortedOperation<R, V> extends Operation<R, V> {
         return new UnsortedOperation<>(operator, operands);
     }
 
-    private UnsortedOperation(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
+    public UnsortedOperation(Operator<R, V> operator, List<? extends Valuable<V>> operands) {
         super(operator, operands);
+    }
+
+    public UnsortedOperation(Operator<R, V> operator) {
+        this(operator, null);
     }
 }

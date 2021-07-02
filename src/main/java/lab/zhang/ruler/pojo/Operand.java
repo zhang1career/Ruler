@@ -2,7 +2,6 @@ package lab.zhang.ruler.pojo;
 
 import lab.zhang.ruler.bo.ComparableValuable;
 import lab.zhang.ruler.bo.Readable;
-import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.util.HashUtil;
 import lombok.Data;
 
@@ -10,30 +9,42 @@ import lombok.Data;
  * @author zhangrj
  */
 @Data
-abstract public class Operand<V, N> implements Valuable<V>, ComparableValuable<V> {
+abstract public class Operand<V, N> implements ComparableValuable<V> {
 
-    protected long id;
-
-    protected RulerType rulerType;
+    protected RulerType type;
 
     protected N value;
 
     protected Readable<V, N> reader;
 
 
-    public Operand(RulerType rulerType, N value, Readable<V, N> reader) {
-        this.rulerType = rulerType;
+    public Operand(RulerType type, N value, Readable<V, N> reader) {
+        this.type = type;
         this.value = value;
         this.reader = reader;
     }
 
-    @Override
-    public int hashCode() {
-        return rulerType.getUuid() ^ HashUtil.codeAsInt(value);
-    }
 
     @Override
     public V getValue(IndexContext indexContext) {
         return reader.read(value, indexContext);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Operand)) {
+            return false;
+        }
+
+        Operand<?, ?> op = (Operand<?, ?>) obj;
+        return hashCode() == op.hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        return type.getUuid() ^ HashUtil.codeAsInt(value);
     }
 }

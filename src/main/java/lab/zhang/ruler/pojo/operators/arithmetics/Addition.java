@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Addition extends SortableOperator<Integer, Integer> {
     public Addition() {
-        super(RulerType.Addition, CardinalityType.Multinary);
+        super(RulerType.ADDITION, CardinalityType.Multinary);
     }
 
     @Override

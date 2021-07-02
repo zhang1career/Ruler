@@ -32,6 +32,9 @@ public class HashUtil {
     }
 
     public static <T> Integer codeAsInt(T value) {
+        if (value instanceof Boolean) {
+            return (Boolean) value ? 1 : 0;
+        }
         if (value instanceof Integer) {
             return (Integer) value;
         }
