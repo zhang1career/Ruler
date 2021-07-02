@@ -1,21 +1,6 @@
 package lab.zhang.ruler.service;
 
-import lab.zhang.ruler.pojo.IndexContext;
-import lab.zhang.ruler.pojo.Operation;
 import lab.zhang.ruler.pojo.Token;
-import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
-import lab.zhang.ruler.pojo.operands.instants.IntInstant;
-import lab.zhang.ruler.pojo.operands.variables.BoolVariable;
-import lab.zhang.ruler.pojo.operands.variables.IntVariable;
-import lab.zhang.ruler.pojo.operations.SortedOperation;
-import lab.zhang.ruler.pojo.operations.UnsortedOperation;
-import lab.zhang.ruler.pojo.operators.SortableOperator;
-import lab.zhang.ruler.pojo.operators.UnsortableOperator;
-import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
-import lab.zhang.ruler.pojo.operators.comparators.GreaterThan;
-import lab.zhang.ruler.pojo.operators.logics.LogicalEqualTo;
-import lab.zhang.ruler.pojo.operators.logics.LogicalOr;
-import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -185,6 +170,79 @@ public class LexerTest {
         expectedEx.expectMessage("type is missing");
 
         String inputCond = "{\"name\":\"在【赠礼】名单中\",\"value\":\"isInGiftNamelist\"}";
+        target.fromJson(inputCond);
+    }
+
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectUnaryGivenNone() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"!\",\"type\":34,\"value\":[]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectUnaryGivenBinary() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"!\",\"type\":34,\"value\":[{\"name\":\"true\",\"type\":0,\"value\":true},{\"name\":\"false\",\"type\":0,\"value\":false}]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectUnaryGivenMultinary() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"!\",\"type\":34,\"value\":[{\"name\":\"true\",\"type\":0,\"value\":true},{\"name\":\"false\",\"type\":0,\"value\":false},{\"name\":\"false\",\"type\":0,\"value\":false}]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectBinaryGivenNone() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"-\",\"type\":21,\"value\":[]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectBinaryGivenUnary() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"-\",\"type\":21,\"value\":[{\"name\":\"1\",\"type\":1,\"value\":1}]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectBinaryGivenMultinary() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"-\",\"type\":21,\"value\":[{\"name\":\"1\",\"type\":1,\"value\":1},{\"name\":\"2\",\"type\":1,\"value\":2},{\"name\":\"3\",\"type\":1,\"value\":3}]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongCard_expectMultinaryGivenNone() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("num of operands is wrong");
+
+        String inputCond = "{\"name\":\"+\",\"type\":20,\"value\":[]}";
+        target.fromJson(inputCond);
+    }
+
+    @Test
+    public void test_fromJson_with_wrongType() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("type of operands is wrong");
+
+        String inputCond = "{\"name\":\"+\",\"type\":20,\"value\":[{\"name\":\"true\",\"type\":0,\"value\":true}]}";
         target.fromJson(inputCond);
     }
 }

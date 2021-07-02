@@ -4,12 +4,16 @@ import lab.zhang.ruler.bo.Valuable;
 import lab.zhang.ruler.pojo.Operand;
 import lab.zhang.ruler.pojo.Operation;
 import lab.zhang.ruler.pojo.Token;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author zhangrj
+ */
 public class Parser {
-    public Valuable<?> generate(Token token) {
+    public Valuable<?> generate(@NotNull Token token) {
         Valuable<?> material = token.getType().getMaterial();
         if (material instanceof Operand) {
             ((Operand) material).setValue(token.getValue());

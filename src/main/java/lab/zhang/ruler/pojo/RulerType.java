@@ -13,16 +13,20 @@ import lab.zhang.ruler.pojo.operators.arithmetics.Addition;
 import lab.zhang.ruler.pojo.operators.arithmetics.Subtraction;
 import lab.zhang.ruler.pojo.operators.comparators.GreaterThan;
 import lab.zhang.ruler.pojo.operators.logics.LogicalEqualTo;
+import lab.zhang.ruler.pojo.operators.logics.LogicalNot;
 import lab.zhang.ruler.pojo.operators.logics.LogicalOr;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author zhangrj
  */
 @Getter
+@AllArgsConstructor
 public enum RulerType {
     /**
      * boolean instant operand
@@ -170,14 +174,45 @@ public enum RulerType {
      */
     ADDITION(20) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.MULTINARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != INT_INSTANT && type != INT_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
         public Valuable<?> getMaterial() {
             return new SortedOperation<>(new Addition());
         }
     },
+
     /**
      * subtraction operator
      */
     SUBTRACTION(21) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != INT_INSTANT && type != INT_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return new UnsortedOperation<>(new Subtraction());
@@ -185,11 +220,19 @@ public enum RulerType {
     },
     Multiplion(22) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.MULTINARY;
+        }
+        @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
     Devision(23) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -199,7 +242,11 @@ public enum RulerType {
     /**
      * greater-than operator
      */
-    EqualTo(24) {
+    EQUAL_TO(24) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -207,11 +254,19 @@ public enum RulerType {
     },
     NotEqualTo(25) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+        @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
     SmallThan(26) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -219,17 +274,29 @@ public enum RulerType {
     },
     SmallThanOrEqualTo(27) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+        @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
     GREATER_THAN(28) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+        @Override
         public Valuable<?> getMaterial() {
             return new UnsortedOperation<>(new GreaterThan());
         }
     },
     GreaterThanOrEqualTo(29) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -241,35 +308,123 @@ public enum RulerType {
      */
     LOGICAL_EQUAL_TO(30) {
         @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
         public Valuable<?> getMaterial() {
             return new SortedOperation<>(new LogicalEqualTo());
         }
     },
-    LogicalNotEqualTo(31) {
+
+    /**
+     * logical not-equal-to operator
+     */
+    LOGICAL_NOT_EQUAL_TO(31) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.BINARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
+
+    /**
+     * logical and operator
+     */
+    LOGICAL_AND(32) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.MULTINARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        @Override
+        public Valuable<?> getMaterial() {
+            return null;
+        }
+    },
+
     /**
      * logical or operator
      */
-    LogicalAnd(32) {
+    LOGICAL_OR(33) {
         @Override
-        public Valuable<?> getMaterial() {
-            return null;
+        public Cardinality getCardinality() {
+            return Cardinality.MULTINARY;
         }
-    },
-    LogicalOr(33) {
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return new SortedOperation<>(new LogicalOr());
         }
     },
-    LogicalNot(34) {
+
+    /**
+     * logical not operator
+     */
+    LOGICAL_NOT(34) {
+        @Override
+        public Cardinality getCardinality() {
+            return Cardinality.UNARY;
+        }
+
+        @Override
+        public boolean checkType(List<RulerType> types) {
+            for (RulerType type : types) {
+                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         @Override
         public Valuable<?> getMaterial() {
-            return null;
+            return new UnsortedOperation<>(new LogicalNot());
         }
     },
     ;
@@ -288,22 +443,64 @@ public enum RulerType {
         uuidMap.put(28,     0x24DB35CA);
         uuidMap.put(30,     0x26AC5F0A);
         uuidMap.put(33,     0x06ED8409);
+        uuidMap.put(34,     0x7D3ADCBA);
     }
 
     private final int id;
-
-    RulerType(int id) {
-        this.id = id;
-    }
 
     int getUuid() {
         return uuidMap.get(id);
     }
 
+    public Cardinality getCardinality() {
+        return Cardinality.NONE;
+    }
+
+    public boolean checkType(List<RulerType> types) {
+        return true;
+    }
+
     public abstract Valuable<?> getMaterial();
 
-        @Override
+    @Override
     public String toString() {
         return String.valueOf(id);
+    }
+
+
+    @Getter
+    @AllArgsConstructor
+    public enum Cardinality {
+        /**
+         * none
+         */
+        NONE(0),
+
+        /**
+         * one
+         */
+        UNARY(1),
+
+        /**
+         * two
+         */
+        BINARY(2),
+
+        /**
+         * more
+         */
+        MULTINARY(Integer.MAX_VALUE) {
+            @Override
+            public boolean checkCard(int num) {
+                return num > 0;
+            }
+        },
+        ;
+
+        private final int card;
+
+        public boolean checkCard(int num) {
+            return card == num;
+        }
     }
 }

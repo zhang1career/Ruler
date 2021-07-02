@@ -1,9 +1,9 @@
 package lab.zhang.ruler.pojo.operators.logics;
 
 import lab.zhang.ruler.bo.Valuable;
+import lab.zhang.ruler.exception.CalculationException;
 import lab.zhang.ruler.pojo.IndexContext;
 import lab.zhang.ruler.pojo.operands.instants.BoolInstant;
-import lab.zhang.ruler.pojo.operators.CardinalityType;
 import lab.zhang.ruler.pojo.RulerType;
 import lab.zhang.ruler.pojo.operators.SortableOperator;
 import org.jetbrains.annotations.NotNull;
@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class LogicalOr extends SortableOperator<Boolean, Boolean> {
     public LogicalOr() {
-        super(RulerType.LogicalOr, CardinalityType.Multinary);
+        super(RulerType.LOGICAL_OR);
     }
 
     @Override
     public Valuable<Boolean> calc(@NotNull List<? extends Valuable<Boolean>> operands, IndexContext indexContext) {
-        if (!cardType.checkCard(operands.size())) {
-            throw new IllegalArgumentException("The num of operands is wrong.");
+        if (!type.getCardinality().checkCard(operands.size())) {
+            throw new CalculationException("The num of operands is wrong.");
         }
 
         for (Valuable<Boolean> operand : operands) {

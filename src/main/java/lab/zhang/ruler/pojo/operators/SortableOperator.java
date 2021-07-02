@@ -8,7 +8,7 @@ import lab.zhang.ruler.pojo.RulerType;
  * @author zhangrj
  */
 abstract public class SortableOperator<R, T> extends Operator<R, T> implements Calculable<R, T> {
-    public SortableOperator(RulerType rulerType, CardinalityType cardType) {
-        super(rulerType, cardType);
+    public SortableOperator(RulerType rulerType) {
+        super(rulerType);
     }
 }

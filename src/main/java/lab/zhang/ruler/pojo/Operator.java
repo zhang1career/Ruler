@@ -1,6 +1,5 @@
 package lab.zhang.ruler.pojo;
 
-import lab.zhang.ruler.pojo.operators.CardinalityType;
 import lab.zhang.ruler.bo.Calculable;
 
 /**
@@ -10,11 +9,8 @@ abstract public class Operator<R, V> implements Calculable<R, V> {
 
     protected RulerType type;
 
-    protected CardinalityType cardType;
-
-    public Operator(RulerType type, CardinalityType cardType) {
+    public Operator(RulerType type) {
         this.type = type;
-        this.cardType = cardType;
     }
 
     @Override
