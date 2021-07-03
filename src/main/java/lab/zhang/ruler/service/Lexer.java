@@ -44,13 +44,13 @@ public class Lexer {
             childrenToken.add(fromJson(childCond.toString()));
         }
         // check children cardinality
-        if (!token.getType().getCardinality().checkCard(childrenToken.size())) {
-            throw new TokenizationException("The num of operands is wrong.");
+        if (!token.getType().checkCard(childrenToken.size())) {
+            throw new TokenizationException("The num of operands is wrong. type=" + token.getType() + ", card=" + childrenToken.size());
         }
         // check children type
         List<RulerType> types = getRulerTypes(childrenToken);
         if (!token.getType().checkType(types)) {
-            throw new TokenizationException("The type of operands is wrong.");
+            throw new TokenizationException("The type of operands is wrong. type=" + token.getType() + ", types=" + types);
         }
         token.setValue(childrenToken);
 

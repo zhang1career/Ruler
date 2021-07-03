@@ -20,7 +20,7 @@ public class LogicalOr extends SortableOperator<Boolean, Boolean> {
 
     @Override
     public Valuable<Boolean> calc(@NotNull List<? extends Valuable<Boolean>> operands, IndexContext indexContext) {
-        if (!type.getCardinality().checkCard(operands.size())) {
+        if (!type.checkCard(operands.size())) {
             throw new CalculationException("The num of operands is wrong.");
         }
 

@@ -20,7 +20,7 @@ public class Subtraction extends UnsortableOperator<Integer, Integer> {
 
     @Override
     public Valuable<Integer> calc(@NotNull List<? extends Valuable<Integer>> operands, IndexContext indexContext) {
-        if (!type.getCardinality().checkCard(operands.size())) {
+        if (!type.checkCard(operands.size())) {
             throw new CalculationException("The num of operands is wrong.");
         }
 

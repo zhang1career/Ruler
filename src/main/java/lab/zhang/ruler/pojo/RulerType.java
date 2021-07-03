@@ -17,10 +17,9 @@ import lab.zhang.ruler.pojo.operators.logics.LogicalNot;
 import lab.zhang.ruler.pojo.operators.logics.LogicalOr;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhangrj
@@ -33,6 +32,11 @@ public enum RulerType {
      */
     BOOL_INSTANT(0) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BOOL_INSTANT, BOOL_VARIABLE));
+        }
+
+        @Override
         public Valuable<Boolean> getMaterial() {
             return new BoolInstant();
         }
@@ -42,56 +46,102 @@ public enum RulerType {
      */
     INT_INSTANT(1) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
         public Valuable<Integer> getMaterial() {
             return new IntInstant();
         }
     },
-    LongInstant(2) {
+    LONG_INSTANT(2) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(LONG_INSTANT, LONG_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    DoubleInstant(3) {
+    DOUBLE_INSTANT(3) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DOUBLE_INSTANT, DOUBLE_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    LocationInstant(4) {
+    LOCATION_INSTANT(4) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(LOCATION_INSTANT, LOCATION_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    CharInstant(5) {
+    CHAR_INSTANT(5) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(CHAR_INSTANT, CHAR_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
+
     /**
      * string instant operand
      */
     STR_INSTANT(6) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(STR_INSTANT, STR_VARIABLE));
+        }
+
+        @Override
         public Valuable<String> getMaterial() {
             return new StrInstant();
         }
     },
-    BytesInstant(7) {
+    BYTES_INSTANT(7) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BYTES_INSTANT, BYTES_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    Dummy1Instant(8) {
+    DUMMY_1_INSTANT(8) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DUMMY_1_INSTANT, DUMMY_1_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    Dummy2Instant(9) {
+    DUMMY_2_INSTANT(9) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DUMMY_2_INSTANT, DUMMY_2_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -103,6 +153,11 @@ public enum RulerType {
      */
     BOOL_VARIABLE(10) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BOOL_INSTANT, BOOL_VARIABLE));
+        }
+
+        @Override
         public Valuable<Boolean> getMaterial() {
             return new BoolVariable();
         }
@@ -112,29 +167,54 @@ public enum RulerType {
      */
     INT_VARIABLE(11) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
         public Valuable<Integer> getMaterial() {
             return new IntVariable();
         }
     },
-    LongVariable(12) {
+    LONG_VARIABLE(12) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(LONG_INSTANT, LONG_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    DoubleVariable(13) {
+    DOUBLE_VARIABLE(13) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DOUBLE_INSTANT, DOUBLE_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    LocationVariable(14) {
+    LOCATION_VARIABLE(14) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(LOCATION_INSTANT, LOCATION_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    CharVariable(15) {
+    CHAR_VARIABLE(15) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(CHAR_INSTANT, CHAR_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -145,23 +225,43 @@ public enum RulerType {
      */
     STR_VARIABLE(16) {
         @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(STR_INSTANT, STR_VARIABLE));
+        }
+
+        @Override
         public Valuable<String> getMaterial() {
             return new StrVariable();
         }
     },
-    BytesVariable(17) {
+    BYTES_VARIABLE(17) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BYTES_INSTANT, BYTES_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    Dummy1Variable(18) {
+    DUMMY_1_VARIABLE(18) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DUMMY_1_INSTANT, DUMMY_1_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    Dummy2Variable(19) {
+    DUMMY_2_VARIABLE(19) {
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(DUMMY_2_INSTANT, DUMMY_2_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -174,18 +274,13 @@ public enum RulerType {
      */
     ADDITION(20) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.MULTINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.MULTINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != INT_INSTANT && type != INT_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
         }
 
         @Override
@@ -199,18 +294,13 @@ public enum RulerType {
      */
     SUBTRACTION(21) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != INT_INSTANT && type != INT_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
         }
 
         @Override
@@ -218,21 +308,101 @@ public enum RulerType {
             return new UnsortedOperation<>(new Subtraction());
         }
     },
-    Multiplion(22) {
+    MULTIPLION(22) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.MULTINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.MULTINARY.checkCard(num);
         }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
         }
     },
-    Devision(23) {
+    DEVISION(23) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
+        public Valuable<?> getMaterial() {
+            return null;
+        }
+    },
+
+    /**
+     * equal-to operator
+     */
+    EQUAL_TO(24) {
+        @Override
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
+        }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BOOL_INSTANT, BOOL_VARIABLE, INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
+        public Valuable<?> getMaterial() {
+            return null;
+        }
+    },
+    NOT_EQUAL_TO(25) {
+        @Override
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
+        }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(BOOL_INSTANT, BOOL_VARIABLE, INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
+        public Valuable<?> getMaterial() {
+            return null;
+        }
+    },
+    SMALL_THAN(26) {
+        @Override
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
+        }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
+        @Override
+        public Valuable<?> getMaterial() {
+            return null;
+        }
+    },
+    SMALL_THAN_OR_EQUAL_TO(27) {
+        @Override
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
+        }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -242,61 +412,33 @@ public enum RulerType {
     /**
      * greater-than operator
      */
-    EQUAL_TO(24) {
-        @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
-        }
-        @Override
-        public Valuable<?> getMaterial() {
-            return null;
-        }
-    },
-    NotEqualTo(25) {
-        @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
-        }
-        @Override
-        public Valuable<?> getMaterial() {
-            return null;
-        }
-    },
-    SmallThan(26) {
-        @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
-        }
-        @Override
-        public Valuable<?> getMaterial() {
-            return null;
-        }
-    },
-    SmallThanOrEqualTo(27) {
-        @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
-        }
-        @Override
-        public Valuable<?> getMaterial() {
-            return null;
-        }
-    },
     GREATER_THAN(28) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return new UnsortedOperation<>(new GreaterThan());
         }
     },
-    GreaterThanOrEqualTo(29) {
+    GREATER_THAN_OR_EQUAL_TO(29) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
+
+        @Override
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(INT_INSTANT, INT_VARIABLE));
+        }
+
         @Override
         public Valuable<?> getMaterial() {
             return null;
@@ -308,18 +450,16 @@ public enum RulerType {
      */
     LOGICAL_EQUAL_TO(30) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(
+                    BOOL_INSTANT, BOOL_VARIABLE,
+                    EQUAL_TO, NOT_EQUAL_TO, SMALL_THAN, SMALL_THAN_OR_EQUAL_TO, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO,
+                    LOGICAL_EQUAL_TO, LOGICAL_NOT_EQUAL_TO, LOGICAL_AND, LOGICAL_OR, LOGICAL_NOT));
         }
 
         @Override
@@ -333,18 +473,16 @@ public enum RulerType {
      */
     LOGICAL_NOT_EQUAL_TO(31) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.BINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.BINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(
+                    BOOL_INSTANT, BOOL_VARIABLE,
+                    EQUAL_TO, NOT_EQUAL_TO, SMALL_THAN, SMALL_THAN_OR_EQUAL_TO, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO,
+                    LOGICAL_EQUAL_TO, LOGICAL_NOT_EQUAL_TO, LOGICAL_AND, LOGICAL_OR, LOGICAL_NOT));
         }
 
         @Override
@@ -358,18 +496,16 @@ public enum RulerType {
      */
     LOGICAL_AND(32) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.MULTINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.MULTINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(
+                    BOOL_INSTANT, BOOL_VARIABLE,
+                    EQUAL_TO, NOT_EQUAL_TO, SMALL_THAN, SMALL_THAN_OR_EQUAL_TO, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO,
+                    LOGICAL_EQUAL_TO, LOGICAL_NOT_EQUAL_TO, LOGICAL_AND, LOGICAL_OR, LOGICAL_NOT));
         }
 
         @Override
@@ -383,18 +519,16 @@ public enum RulerType {
      */
     LOGICAL_OR(33) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.MULTINARY;
+        public boolean checkCard(int num) {
+            return Cardinality.MULTINARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(
+                    BOOL_INSTANT, BOOL_VARIABLE,
+                    EQUAL_TO, NOT_EQUAL_TO, SMALL_THAN, SMALL_THAN_OR_EQUAL_TO, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO,
+                    LOGICAL_EQUAL_TO, LOGICAL_NOT_EQUAL_TO, LOGICAL_AND, LOGICAL_OR, LOGICAL_NOT));
         }
 
         @Override
@@ -408,18 +542,16 @@ public enum RulerType {
      */
     LOGICAL_NOT(34) {
         @Override
-        public Cardinality getCardinality() {
-            return Cardinality.UNARY;
+        public boolean checkCard(int num) {
+            return Cardinality.UNARY.checkCard(num);
         }
 
         @Override
-        public boolean checkType(List<RulerType> types) {
-            for (RulerType type : types) {
-                if (type != BOOL_INSTANT && type != BOOL_VARIABLE) {
-                    return false;
-                }
-            }
-            return true;
+        public Set<RulerType> getPairableOperandTypes() {
+            return new HashSet<>(Arrays.asList(
+                    BOOL_INSTANT, BOOL_VARIABLE,
+                    EQUAL_TO, NOT_EQUAL_TO, SMALL_THAN, SMALL_THAN_OR_EQUAL_TO, GREATER_THAN, GREATER_THAN_OR_EQUAL_TO,
+                    LOGICAL_EQUAL_TO, LOGICAL_NOT_EQUAL_TO, LOGICAL_AND, LOGICAL_OR, LOGICAL_NOT));
         }
 
         @Override
@@ -428,6 +560,7 @@ public enum RulerType {
         }
     },
     ;
+
 
     static Map<Integer, Integer> uuidMap;
     static {
@@ -452,13 +585,24 @@ public enum RulerType {
         return uuidMap.get(id);
     }
 
-    public Cardinality getCardinality() {
-        return Cardinality.NONE;
+    public boolean checkCard(int num) {
+        return Cardinality.NONE.checkCard(num);
     }
 
-    public boolean checkType(List<RulerType> types) {
+    public boolean checkType(@NotNull List<RulerType> types) {
+        if (types.size() <= 0) {
+            return true;
+        }
+        Set<RulerType> pairableTypes = this.getPairableOperandTypes();
+        for (RulerType type : types) {
+            if (!pairableTypes.contains(type)) {
+                return false;
+            }
+        }
         return true;
     }
+
+    public abstract Set<RulerType> getPairableOperandTypes();
 
     public abstract Valuable<?> getMaterial();
 
