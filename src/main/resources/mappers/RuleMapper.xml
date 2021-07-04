@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lab.zhang.ruler.dao.RuleDao">
+
+    <resultMap id="BaseResultMap" type="lab.zhang.ruler.pojo.Rule">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cond" jdbcType="VARCHAR" property="cond"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, cond
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from rule
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select <include refid="BaseColumnList"/>
+        from rule
+        where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="lab.zhang.ruler.pojo.Rule">
+        insert into rule
+        values (#{id}, #{cond})
+    </insert>
+
+    <update id="update" parameterType="lab.zhang.ruler.pojo.Rule">
+        update rule
+        set cond = #{cond}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from rule
+        where id = #{id}
+    </delete>
+</mapper>
